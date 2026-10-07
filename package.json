@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "build": "vite build",
-    "start": "node server.ts",
+    "start": "tsx server.ts",
     "test": "tsx --test tests/unit.test.ts tests/integration.test.ts tests/security.test.ts tests/socket.test.ts tests/e2e.test.ts tests/section22_performance.test.ts tests/section23_accessibility.test.ts tests/section23_secure_uploads.test.ts tests/section24_frontend_responsiveness.test.ts tests/section25_accessibility.test.ts tests/section26_devops.test.ts tests/section26_security_audit.test.ts tests/section26_functional_audit.test.ts",
     "test:e2e": "tsx --test tests/e2e.test.ts",
     "test:perf": "tsx --test tests/section22_performance.test.ts",
