@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="cs-p" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="50%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="cs-s" x1="44" y1="8" x2="8" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#4338CA" stop-opacity="0.85" />
+    </linearGradient>
+    <radialGradient id="cs-glow" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#A5B4FC" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <circle cx="24" cy="24" r="21" fill="url(#cs-glow)" />
+  <ellipse cx="24" cy="24" rx="19" ry="9" transform="rotate(-25 24 24)" stroke="url(#cs-p)" stroke-width="2.75" stroke-linecap="round" />
+  <ellipse cx="24" cy="24" rx="19" ry="8.5" transform="rotate(38 24 24)" stroke="url(#cs-s)" stroke-width="2.5" stroke-dasharray="14 3.5 6 3.5" stroke-linecap="round" />
+  <path d="M17.5 28 L12.5 36.5 L22.5 32.5 Z" fill="url(#cs-p)" />
+  <circle cx="24" cy="24" r="10.5" fill="url(#cs-p)" />
+  <ellipse cx="21" cy="20.5" rx="5" ry="2.75" fill="#FFFFFF" fill-opacity="0.35" />
+  <circle cx="39" cy="14" r="3.25" fill="#38BDF8" />
+  <circle cx="39" cy="14" r="1.5" fill="#FFFFFF" />
+</svg>

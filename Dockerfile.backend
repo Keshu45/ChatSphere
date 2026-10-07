@@ -1,0 +1,66 @@
+# syntax=docker/dockerfile:1
+# ------------------------------------------------------------------------------
+# ChatSphere Backend Dockerfile (Production Multi-Stage Build)
+# ------------------------------------------------------------------------------
+
+# Stage 1: Build & Dependency Resolution
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
+# Copy package specifications for caching
+COPY package.json package-lock.json* bun.lock* ./
+
+# Install all dependencies (including devDependencies for build & type checking)
+RUN npm install --legacy-peer-deps
+
+# Copy application source code and configs
+COPY tsconfig.json vite.config.ts index.html metadata.json ./
+COPY src/ ./src/
+COPY server/ ./server/
+COPY server.ts ./
+
+# Build frontend static bundle for unified serving
+RUN npm run build
+
+# Remove development dependencies to prune container size
+RUN npm prune --production
+
+# Stage 2: Minimal Production Runtime
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Install curl for reliable container health checking
+RUN apk add --no-cache curl
+
+# Copy runtime artifacts from builder
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/server ./server
+COPY --from=builder /app/server.ts ./
+COPY --from=builder /app/tsconfig.json ./
+
+# Ensure persistence and attachment storage directories exist with node user ownership
+RUN mkdir -p /app/.data/storage/attachments && \
+    chown -R node:node /app
+
+# Run as non-privileged user for security hardening
+USER node
+
+# Expose backend API and WebSocket port
+EXPOSE 3000
+
+# Health check against observability endpoint
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Start production server
+CMD ["npx", "tsx", "server.ts"]

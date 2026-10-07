@@ -1,0 +1,149 @@
+{
+  "planHash": "e6b78fc9e24a9a1ffa22d95a3efcd2f3c378b40bbd98fa04db963904d714decf",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-07T17:52:55.6470987Z",
+  "retryCount": 3,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "typescript-typecheck",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E react-example@0.0.0 lint\r\n\u003E tsc --noEmit\r\n\r\n",
+        "durationMs": 1723
+      },
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E react-example@0.0.0 build\r\n\u003E vite build\r\n\r\n\u001B[36mvite v8.3.3 \u001B[32mbuilding client environment for production...\u001B[36m\u001B[39m\r\ntransforming...\r\n\u2713 1768 modules transformed.\r\nrendering chunks...\r\ncomputing gzip size...\r\ndist/index.html                   1.48 kB \u2502 gzip:   0.66 kB\r\ndist/assets/index-BDFzhsZ8.css   94.24 kB \u2502 gzip:  13.87 kB\r\ndist/assets/index-DFghd3zL.js   735.11 kB \u2502 gzip: 197.93 kB\r\n\r\n\u001B[33m[plugin builtin:vite-reporter] \r\n(!) Some chunks are larger than 500 kB after minification. Consider:\r\n- Using dynamic import() to code-split the application\r\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\r\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\u001B[39m\r\n\u001B[32m\u2713 built in 389ms\u001B[39m\r\n",
+        "durationMs": 1517
+      },
+      {
+        "name": "health-endpoint-200",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n{\u0022status\u0022:\u0022UP\u0022,\u0022uptimeSeconds\u0022:7,\u0022timestamp\u0022:\u00222026-10-07T17:52:49.761Z\u0022}\n--- server output ---\n\r\n\u003E react-example@0.0.0 dev\r\n\u003E tsx server.ts\r\n\r\n[2026-10-07T17:52:47.436Z] [INFO] Loaded ChatSphere data from MongoDB\r\n[2026-10-07T17:52:47.445Z] [INFO] Connected to MongoDB\r\n[2026-10-07T17:52:47.459Z] [INFO] Distributed Redis adapter configured for real-time socket cluster\r\n\u001B[31mWebSocket server error: Port 24678 is already in use\u001B[39m\r\n[2026-10-07T17:52:49.561Z] [INFO] ChatSphere full-stack engine running on http://0.0.0.0:3039\r\n",
+        "durationMs": 8527
+      },
+      {
+        "name": "ready-endpoint-200",
+        "kind": "http-probe",
+        "verificationMethod": "output-contains",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n{\u0022status\u0022:\u0022READY\u0022,\u0022service\u0022:\u0022ChatSphere API Engine\u0022,\u0022dependencies\u0022:{\u0022database\u0022:\u0022mongodb-connected\u0022,\u0022redis\u0022:\u0022redis-configured\u0022,\u0022sockets\u0022:\u0022operational\u0022},\u0022memory\u0022:{\u0022heapUsedMb\u0022:62.4,\u0022heapTotalMb\u0022:89.4},\u0022timestamp\u0022:\u00222026-10-07T17:52:50.616Z\u0022}",
+        "durationMs": 686
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E react-example@0.0.0 test\r\n\u003E tsx --test tests/unit.test.ts tests/integration.test.ts tests/security.test.ts tests/socket.test.ts tests/e2e.test.ts tests/section22_performance.test.ts tests/section23_accessibility.test.ts tests/section23_secure_uploads.test.ts tests/section24_frontend_responsiveness.test.ts tests/section25_accessibility.test.ts tests/section26_devops.test.ts tests/section26_security_audit.test.ts tests/section26_functional_audit.test.ts\r\n\r\nTAP version 13\r\n# Subtest: 20.5 / SECTION 21 \u2014 Comprehensive End-to-End Tests\r\n    # Subtest: Step 1: User A registers with validated credentials\r\n    ok 1 - Step 1: User A registers with validated credentials\r\n      ---\r\n      duration_ms: 151.1878\r\n      type: \u0027test\u0027\r\n      ...\r\n# [2026-10-07T17:52:53.901Z] [INFO] [usr:usr_1791395573767_6d1y6] Real-time socket client connected\r\n    # Subtest: Step 2: User A logs in and establishes real-time WebSocket connection\r\n    ok 2 - Step 2: User A logs in and establishes real-time WebSocket connection\r\n      ---\r\n      duration_ms: 134.8208\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Setup: User B registers in the system\r\n    ok 3 - Setup: User B registers in the system\r\n      ---\r\n      duration_ms: 85.0284\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 3: User A searches for User B in the team directory\r\n    ok 4 - Step 3: User A searches for User B in the team directory\r\n      ---\r\n      duration_ms: 7.31\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 4: User A creates a direct conversation with User B\r\n    ok 5 - Step 4: User A creates a direct conversation with User B\r\n      ---\r\n      duration_ms: 18.6951\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 5: User A sends a message while User B is offline (Message Persistence \u0026 Delivery State)\r\n    ok 6 - Step 5: User A sends a message while User B is offline (Message Persistence \u0026 Delivery State)\r\n      ---\r\n      duration_ms: 2.7927\r\n      type: \u0027test\u0027\r\n      ...\r\n# [2026-10-07T17:52:54.122Z] [INFO] [usr:usr_1791395573995_yh7ff] Real-time socket client connected\r\n    # Subtest: Step 6: User B logs in separately and connects to real-time engine\r\n    ok 7 - Step 6: User B logs in separately and connects to real-time engine\r\n      ---\r\n      duration_ms: 107.2065\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 7: User B checks conversation list and verifies conversation preview \u0026 unread count\r\n    ok 8 - Step 7: User B checks conversation list and verifies conversation preview \u0026 unread count\r\n      ---\r\n      duration_ms: 5.1344\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 8: User B opens conversation and loads full message history\r\n    ok 9 - Step 8: User B opens conversation and loads full message history\r\n      ---\r\n      duration_ms: 5.0507\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 9: User B reads the message and synchronizes read receipt to server and peers\r\n    ok 10 - Step 9: User B reads the message and synchronizes read receipt to server and peers\r\n      ---\r\n      duration_ms: 6.6706\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 10: User A receives the read status for the sent message\r\n    ok 11 - Step 10: User A receives the read status for the sent message\r\n      ---\r\n      duration_ms: 3.82\r\n      type: \u0027test\u0027\r\n      ...\r\n    # Subtest: Step 11: User B replies in real-time; User A receives live message instantly\r\n    ok 12 - Step 11: User B replies in real-time; User A receives live message instantly\r\n      ---\r\n      duration_ms: 3.4336\r\n      type: \u0027test\u0027\r\n      ...\r\n# [2026-10-07T17:52:54.161Z] [INFO] [usr:usr_1791395573767_6d1y6] Real-time socket client disconnected\r\n# [2026-10-07T17:52:54.184Z] [INFO] [usr:usr_1791395573767_6d1y6] Real-time socket client connected\r\n    # Subtest: Step 12: Browser reload simulation preserves complete message history and state\r\n    ok 13 - Step 12: Browser reload simulation preserves complete message history and state\r\n      ---\r\n      duration_ms: 37.8118\r\n      type: \u0027test\u0027\r\n      ...\r\n# [2026-10-07T17:52:54.198Z] [INFO] [usr:usr_1791395573767_6d1y6] Real-time socket client disco\n\u2026[truncated]",
+        "durationMs": 4948,
+        "testResults": {
+          "testFramework": "unknown",
+          "runnerDetectedFrom": "none",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      }
+    ],
+    "executions": [
+      {
+        "source": "typescript-typecheck",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "lint"
+        ],
+        "cwd": "c:\\Users\\Keshav\\Downloads\\chatsphere---real-time-messaging-platform (2)",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "c:\\Users\\Keshav\\Downloads\\chatsphere---real-time-messaging-platform (2)",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "health-endpoint-200",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "dev"
+        ],
+        "cwd": "c:\\Users\\Keshav\\Downloads\\chatsphere---real-time-messaging-platform (2)",
+        "env": {
+          "PORT": "3039"
+        },
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "ready-endpoint-200",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "dev"
+        ],
+        "cwd": "c:\\Users\\Keshav\\Downloads\\chatsphere---real-time-messaging-platform (2)",
+        "env": {
+          "PORT": "3039"
+        },
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "test"
+        ],
+        "cwd": "c:\\Users\\Keshav\\Downloads\\chatsphere---real-time-messaging-platform (2)",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+name: ChatSphere CI & Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+  workflow_dispatch:
+
+# Ensure concurrent runs on the same branch are canceled
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: Build, Lint & Automated Verification Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      NODE_ENV: test
+      PORT: 3000
+      JWT_SECRET: ci-test-super-secure-jwt-secret-token-key-2026
+      SESSION_SECRET: ci-test-session-secret-cookie-key-2026
+      CLIENT_URL: http://localhost:3000
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js runtime environment
+      - name: Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: |
+          npm install --legacy-peer-deps
+
+      # Step 4: Type Checking & Static Code Analysis
+      - name: Run Type Checking & Linting (tsc --noEmit)
+        run: |
+          npm run lint
+
+      # Step 5: Unit Tests
+      - name: Run Unit Tests
+        run: |
+          npx tsx --test tests/unit.test.ts
+
+      # Step 6: Integration, Socket, & Security Tests
+      - name: Run Integration & Security Tests
+        run: |
+          npx tsx --test tests/integration.test.ts tests/security.test.ts tests/socket.test.ts
+
+      # Step 7: Accessibility & Responsive Layout Tests
+      - name: Run Accessibility (a11y) & Responsiveness Tests
+        run: |
+          npx tsx --test tests/section23_accessibility.test.ts tests/section24_frontend_responsiveness.test.ts tests/section25_accessibility.test.ts
+
+      # Step 8: Secure Storage & Performance Tests
+      - name: Run Uploads & Performance Tests
+        run: |
+          npx tsx --test tests/section22_performance.test.ts tests/section23_secure_uploads.test.ts
+
+      # Step 9: End-to-End (E2E) Functional Tests
+      - name: Run End-to-End (E2E) Tests
+        run: |
+          npm run test:e2e
+
+      # Step 10: Full Production Application Build
+      - name: Build Production Application (Vite Build)
+        run: |
+          npm run build
+
+      # Step 11: Verify Production Build Artifacts
+      - name: Verify Build Artifacts
+        run: |
+          test -d dist
+          test -f dist/index.html
+          echo "Production build successfully verified in /dist"

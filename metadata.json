@@ -1,0 +1,6 @@
+{
+  "name": "ChatSphere - Real-Time Messaging Platform",
+  "description": "Production-grade real-time messaging platform with direct & group chats, live presence, delivery & read receipts, and rich media sharing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
